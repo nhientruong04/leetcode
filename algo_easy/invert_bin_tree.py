@@ -1,5 +1,5 @@
 class Solution:
-    def invertTree(self, root):
+    def invertTree_BFS(self, root):
         if root == None or (root.left==None and root.right==None):
             return root
         nodes = [root]
@@ -18,5 +18,19 @@ class Solution:
             temp_left_child = curr_node.left
             curr_node.left = curr_node.right
             curr_node.right = temp_left_child
+
+        return root
+    
+    # post-order traversal
+    def invertTree_DFS(self, root):
+        if root == None or (root.left==None and root.right==None):
+            return root
+
+        self.invertTree_DFS(root.left)
+        self.invertTree_DFS(root.right)
+
+        temp_left_child = root.left
+        root.left = root.right
+        root.right = temp_left_child
 
         return root
